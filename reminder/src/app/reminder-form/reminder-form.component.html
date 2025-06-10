@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="text">Set a Reminder</div>
+
+  <form [formGroup]="reminderForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="input-data">
+        <input
+          [attr.type]="dateInputType"
+          formControlName="date"
+          required
+          placeholder=""
+          (focus)="dateInputType = 'date'"
+          (blur)="onDateBlur()"
+        />
+        <div class="underline"></div>
+        <label>Date</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="input-data">
+        <input
+          [attr.type]="timeInputType"
+          formControlName="time"
+          required
+          placeholder=""
+          (focus)="timeInputType = 'time'"
+          (blur)="onTimeBlur()"
+        />
+        <div class="underline"></div>
+        <label>Time</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data textarea">
+        <textarea formControlName="message" rows="6" required></textarea>
+        <div class="underline"></div>
+        <label>Write your message</label>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="input-data">
+        <select formControlName="method" required>
+          <option value="email">Email</option>
+          <option value="sms">SMS</option>
+        </select>
+        <div class="underline"></div>
+        <label>Reminder Method</label>
+      </div>
+    </div>
+
+    <div class="form-row submit-btn">
+      <div class="input-data">
+        <div class="inner"></div>
+        <input type="submit" value="Submit" [disabled]="reminderForm.invalid" />
+      </div>
+    </div>
+  </form>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>
